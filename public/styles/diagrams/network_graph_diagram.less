@@ -1,0 +1,63 @@
+/*
+ * code-forensics
+ * Copyright (C) 2016-2021 Silvio Montanari
+ * Distributed under the GNU General Public License v3.0
+ * see http://www.gnu.org/licenses/gpl.html
+ */
+
+.network-graph-diagram {
+  .links line {
+    stroke: #AAAAAA;
+    stroke-opacity: 0.6;
+    pointer-events: none;
+
+    &.highlighted {
+      stroke: #000000;
+      stroke-opacity: 1;
+      pointer-events: visible;
+    }
+
+    &.link-hidden {
+      stroke-opacity: 0.1;
+    }
+
+    &:hover {
+      stroke: #4682B4;
+      stroke-width: 5px;
+    }
+  }
+
+  .nodes circle {
+    stroke: #FFFFFF;
+    stroke-width: 1.5px;
+
+    &.node-hidden {
+      fill-opacity: 0.1;
+    }
+  }
+}
+
+.d3-tip {
+  &.network-graph-diagram {
+    &.node-info {
+      .item-list {
+        background-color: #EEEEEE;
+        border: 1px solid #DDDDDD;
+        border-radius: 5px;
+        padding: 5px;
+        .item {
+          text-align: center;
+          color: #000000;
+          padding: 2px 0;
+          &.title {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    &.link-info {
+      .element-info-tooltip-mixin();
+    }
+  }
+}

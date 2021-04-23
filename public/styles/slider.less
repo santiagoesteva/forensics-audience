@@ -1,0 +1,30 @@
+/*
+ * code-forensics
+ * Copyright (C) 2016-2021 Silvio Montanari
+ * Distributed under the GNU General Public License v3.0
+ * see http://www.gnu.org/licenses/gpl.html
+ */
+
+.slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #4682B4;
+}
+
+.slider {
+  outline: none;
+  width: 90%;
+
+  &::-webkit-slider-thumb {
+    .slider-thumb();
+  }
+
+  &::-moz-range-thumb {
+    .slider-thumb();
+  }
+}

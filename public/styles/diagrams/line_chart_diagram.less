@@ -1,0 +1,62 @@
+/*
+ * code-forensics
+ * Copyright (C) 2016-2021 Silvio Montanari
+ * Distributed under the GNU General Public License v3.0
+ * see http://www.gnu.org/licenses/gpl.html
+ */
+
+.line-mixin() {
+  .line {
+    fill: none;
+    stroke-width: 2px;
+  }
+}
+
+.line-chart-diagram {
+  background-color: #FAFAFA;
+
+  &#system-evolution-revisions, &#system-evolution-commits, &#system-evolution-authors, &#system-evolution-churn {
+    .chart-axis-mixin();
+    .line-mixin();
+    .chart-legend-mixin();
+  }
+
+  &#lc-total, &#lc-func-mean, &#lc-func-sd, &#lc-sloc {
+    .chart-axis-mixin();
+    .line-mixin();
+    .chart-legend-mixin();
+
+    .brush rect {
+      fill-opacity: 0.1;
+    }
+
+    .zoom {
+      cursor: move;
+      fill: none;
+      pointer-events: all;
+    }
+
+    .dots {
+      opacity: 0.8
+    }
+  }
+}
+
+.d3-tip {
+  &.line-chart-diagram {
+    .element-info-tooltip-mixin(
+      @title-color: #4682B4;
+      @title-bg-color: #FFFFFF;
+      @font-weight: bold
+    );
+
+    .property-list {
+      .element-property-tooltip-mixin(
+        @value-color: #000000;
+        @value-text-align: left;
+        @label-font-weight: bold;
+        @grid-template-columns: 1fr 2fr;
+      );
+    }
+  }
+}

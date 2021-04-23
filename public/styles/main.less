@@ -1,0 +1,140 @@
+/*
+ * code-forensics
+ * Copyright (C) 2016-2021 Silvio Montanari
+ * Distributed under the GNU General Public License v3.0
+ * see http://www.gnu.org/licenses/gpl.html
+ */
+
+@import 'mixins.less';
+@import 'diagrams.less';
+@import 'graph_controls.less';
+@import 'slider.less';
+@import 'd3_tip.less';
+@import 'reports_table.less';
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.vertical-wrapper {
+  overflow-y: auto;
+}
+
+.no-events {
+  pointer-events: none;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: 90%;
+  max-height: 90%;
+
+  .left-column {
+    float: left;
+    line-height: 1.5em;
+    margin: 5px 0 0 5px;
+    width: 200px;
+
+    a:visited {
+      color:#0000FF;
+    }
+  }
+
+  .report-info {
+    margin-left: 210px;
+    margin-bottom: 10px;
+    .title {
+      font-size: 1.5em;
+    }
+    .description {
+      font-size: 1.1em;
+      font-style: italic;
+    }
+    .time-period {
+      margin-top: 5px;
+      font-size: 1em;
+    }
+  }
+
+  .report-controls {
+    font-size: 0.65em;
+    float: left;
+    min-width: 200px;
+
+    .control-block {
+      margin-bottom: 20px;
+    }
+
+    .control-title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .diagram-name {
+      font-size: 1.4em;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .diagram-selection {
+      border: 1px solid;
+      border-radius: 5px;
+      margin: 10px 0;
+      max-height: 210px;
+      overflow-y: auto;
+
+      input {
+        visibility: hidden;
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        &:checked + label {
+          color: #FFFFFF;
+          background-color: #4682B4;
+        }
+      }
+
+      .diagram-selection-name {
+        display: block;
+        cursor: pointer;
+        font-size: 1.2em;
+        line-height: 24px;
+        background-color: #F9F9F9;
+        text-align: center;
+        border:1px solid #FFFFFF;
+        border-radius: .25em;
+        padding: 0 5px;
+        &:hover {
+          background-color: #DDDDDD;
+          color: #666666;
+        }
+      }
+    }
+  }
+
+  .no-graphs-msg {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.5em;
+  }
+
+  .graph-content {
+    margin-left: 210px;
+    background-color: #F1F1F1;
+    position: relative;
+
+    .graph-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: -10;
+      display: none;
+      &.showing {
+        display: flex;
+        opacity: 1;
+        z-index: 10;
+      }
+    }
+  }
+}

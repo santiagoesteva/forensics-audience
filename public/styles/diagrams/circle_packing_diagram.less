@@ -1,0 +1,113 @@
+/*
+ * code-forensics
+ * Copyright (C) 2016-2021 Silvio Montanari
+ * Distributed under the GNU General Public License v3.0
+ * see http://www.gnu.org/licenses/gpl.html
+ */
+
+.node-mixin() {
+  cursor: pointer;
+  pointer-events: visible;
+
+  &:hover {
+    stroke: #000000;
+    stroke-width: 1.5px;
+  }
+}
+
+.hierarchical-node-mixin() {
+  .node-mixin();
+  &.node-root {
+    stroke: #777777;
+    stroke-width: 2px;
+    pointer-events: none;
+  }
+  &.node-leaf {
+    cursor: default;
+    fill: #FFFFFF;
+    stroke: #777777;
+    stroke-width: 1px;
+    pointer-events: fill;
+  }
+}
+
+.hierarchical-label-mixin(
+  @parent_color,
+  @leaf_color,
+  @parent_shadow_color,
+  @leaf_shadow_color
+) {
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  pointer-events: none;
+
+  &.label-parent {
+    fill: @parent_color;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 0 2px 0 @parent_shadow_color, 2px 0 0 @parent_shadow_color, -2px 0 0 @parent_shadow_color, 0 -2px 0 @parent_shadow_color;
+  }
+
+  &.label-leaf {
+    fill: @leaf_color;
+    text-shadow: 0 1px 0 @leaf_shadow_color, 1px 0 0 @leaf_shadow_color, -1px 0 0 @leaf_shadow_color, 0 -1px 0 @leaf_shadow_color;
+  }
+}
+
+.circle-packing-diagram {
+  background-color: #333333;
+
+  &#hotspot-analysis-sloc, &#hotspot-analysis-complexity, &.temporal-coupling {
+    .node {
+      .hierarchical-node-mixin();
+    }
+
+    .label {
+      .hierarchical-label-mixin(#0044FF, #000000, #FFFFFF, #FFFFFF);
+
+      &.label-heavy {
+        fill: #FFFFFF;
+        text-shadow: 0 1px 0 #000000, 1px 0 0 #000000, -1px 0 0 #000000, 0 -1px 0 #000000;
+      }
+    }
+  }
+
+  &#individual-knowledge-map, &#team-knowledge-map {
+    .node {
+      .hierarchical-node-mixin();
+    }
+    .label {
+      .hierarchical-label-mixin(#000000, #000000, #FFFFFF, #FFFFFF);
+    }
+  }
+
+  &#main-developer-coupling {
+    font-size: 10px;
+    .node {
+      .node-mixin();
+      stroke: #777777;
+      stroke-width: 1px;
+
+      &.node--root {
+        fill: #F5F5F5;
+        pointer-events: none;
+      }
+
+      &.selected {
+        stroke: #000000;
+        stroke-width: 3px;
+      }
+    }
+
+    .label {
+      text-anchor: middle;
+      pointer-events: none;
+    }
+  }
+}
+
+.d3-tip {
+  &.circle-packing-diagram {
+    .element-info-tooltip-mixin();
+  }
+}
